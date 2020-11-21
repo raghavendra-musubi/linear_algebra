@@ -17,21 +17,30 @@ class Matrix:
         constructor function for Matrix data-type
         '''    
 
-        # if input list is not empty
-        if len(input_list) > 0:
-            self.is_empty = False
-            
-            # check if input list is vector
-            # isinstance(input_list, list):
+        # if input list is empty
+        if self.is_empty(input_list):
 
-        else:
             # set empty flag
             self.is_empty = True
             self.final_matrix = input_list
+        
+        # if input list is not empty 
+        else:
+            self.is_empty = False
+            
+            # check if vector
+            if self.is_numeric_list(input_list):
+                self.is_vector = True
+                self.is_matrix = True
+            elif self.is_nested_list(input_list):
+                # check if matrix if 2D 
+                if self.is_numeric_two_dim(input_list):
+                    self.is_vector = False
+                    self.is_matrix = True
+            else:
+                raise Exception('Input is not a valid vector or 2D matrix!')
 
         self.input_list = input_list
-
-    # Dunder Functions -------------------------------------------------
 
     # Class Methods ----------------------------------------------------
 
@@ -41,33 +50,43 @@ class Matrix:
         """
         pass
 
+
     # Helper Functions -------------------------------------------------
-    
+    @staticmethod
     def is_numeric_list(input_list):
         """
         helper function to check if all list elements are numeric
         """
         return sum([ isinstance(ele, (int, float)) for ele in input_list]) == len(input_list)
-
+    
+    @staticmethod
     def is_empty(input_list):
         """
         checks if list is empty
         """
-        pass
-
-    def is_matrix(input_list):
+        return len(input_list) == 0
+        
+    @staticmethod
+    def is_nested_list(input_list):
         """
         check if input list is valid matrix
         """
-        pass
-
-    def is_two_dim(input_matrix):
+        # check for all list elements
+        return sum([ isinstance(ele, (list)) for ele in input_list]) == len(input_list)
+        
+    @staticmethod
+    def is_numeric_two_dim(input_matrix):
         """
-        check if input matrix is 2-D
+        check if input nested list is 2-D
         """
-        pass
-
+        
+            
+    @staticmethod
     def size(input_matrix_or_vector):
         """
         computes the size of a verified vector or 2D matrix
         """
+        pass
+
+
+    # Dunder Functions -------------------------------------------------
