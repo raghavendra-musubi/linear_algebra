@@ -83,6 +83,8 @@ class Matrix:
 
             # set empty flag
             self.is_empty = True
+            self.is_vector = True
+            self.is_matrix = True
             self.final_matrix = input_list
             self.size = (0,0)
         
@@ -105,11 +107,13 @@ class Matrix:
                     # check rectangular AND all numerical rows 
                     if self.is_rectangular(input_list) and sum( [ self.is_numeric_list(list_ele) for list_ele in input_list ] ) == len(input_list):
                         
-                        # one column array
+                        # one column nested vector input
                         if len(input_list[0]) == 1:
                             self.is_vector = True
                             self.is_matrix = False
                             self.final_matrix = flatten_arr_to_vec(input_list)
+
+                        # multi column matrix
                         else: 
                             self.is_vector = False
                             self.is_matrix = True
@@ -137,9 +141,31 @@ class Matrix:
 
     def __str__(self):
         string_to_print = '\n'
+        
+        # print vector 
         if self.is_vector:
+
             for ele in self.final_matrix:
-                string_to_print += '|' + ele + '|\n'
-            string_to_print += '\n'
+                string_to_print += '| ' + str(ele) + ' |\n'
+
             return string_to_print
-        elif self.is_matrix
+        
+        # print matrix
+        elif self.is_matrix:
+
+            for row in self.final_matrix:
+
+                string_to_print += '| '
+
+                for ele in row:
+                    string_to_print +=  str(ele) + ' '
+
+                string_to_print += '|\n'
+
+            return string_to_print
+
+        
+        # throw error
+        else:
+            raise Exception('Cannot print Matrix!')
+            
