@@ -9,36 +9,46 @@ import unittest
 
 # Define Inputs --------------------------------------------------------
 
-## static methods ------------------------------
-# empty list
-list_o = []
+## 00. invalid inputs -------------------------------
+
+# invalid list
+list_00 = []
 
 # vector list
-list_a = [1,2,3,4]
-
-# nested list for matrix 
-list_b = [[1],[2],[3],[4]]
-
-# nested list for matrix with empty list
-list_c = [[1],[2],[],[4]]
+list_01 = [1,2,3,4]
 
 # a non-entirely-numerical list
-list_d = [2,3,[],4]
+list_02 = [2,3,[],4]
+
+# invalid list input
+list_03 = [[1],[2],[],[4]]
 
 # a non-rectangular list
-list_e = [[1,2],[3,4],[5],[6,7,8]]
+list_04 = [[1,2],[3,4],[5],[6,7,8]]
 
-## class methods ------------------------------
-# 2x3 matrix for transpose 
-list_f = [[1,2,3],[4,5,6]]
 
-# 4x3 matrix for transpose 
-list_g = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+## 01. valid inputs ---------------------------------
 
-# 3x3 matrix for transpose 
-list_h = [[1,2,3],[4,5,6],[7,8,9]]
+# empty vector
+list_10 = [[]]
 
-# Unit Tests -----------------------------------------------------------
+# 4x1 col vector
+list_11 = [[1],[2],[3],[4]]
+
+# 1x3 row vector
+list_12 = [[1,2,3]]
+
+# 2x3 matrix  
+list_21 = [[1,2,3],[4,5,6]]
+
+# 4x3 matrix  
+list_22 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+
+# 3x3 matrix  
+list_23 = [[1,2,3],[4,5,6],[7,8,9]]
+
+
+## Unit Tests -----------------------------------------------------------
 
 class TestStringMethods(unittest.TestCase):
 
@@ -52,11 +62,6 @@ class TestStringMethods(unittest.TestCase):
         self.assertFalse(Matrix.is_empty(list_c))
         self.assertFalse(Matrix.is_empty(list_d))
 
-    # vector test
-    def test_vector(self):
-        self.assertTrue(Matrix.is_numeric_list(list_a))
-        self.assertFalse(Matrix.is_numeric_list(list_b))
-
     # nested-list test 
     def test_nested_list(self):
         self.assertTrue(Matrix.is_nested_list(list_b))
@@ -68,13 +73,18 @@ class TestStringMethods(unittest.TestCase):
         self.assertTrue( Matrix.is_rectangular(list_b))
         self.assertFalse( Matrix.is_rectangular(list_e))
 
-    # flatten to vector test
-    def test_flatten_arr_to_vec(self):
-        self.assertEqual( Matrix.flatten_arr_to_vec(list_b),list_a)
+    # numeric list check test 
+    def test_rectangular(self):
+        self.assertTrue( Matrix.is_rectangular(list_b))
+        self.assertFalse( Matrix.is_rectangular(list_e))
 
     # size function test
     def test_size(self):
         self.assertEqual( Matrix.size(list_b), (4,1))
+
+    # numeric-only-list test
+    def test_numeric_only(self):
+        self.assertTrue( Matrix.size(list_b))
 
     # dim check function test
     def test_dim_check(self):
