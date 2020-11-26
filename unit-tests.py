@@ -93,9 +93,9 @@ class TestStringMethods(unittest.TestCase):
         
     # test zero matrix generator
     def test_zero_matrix(self):
-        self.assertEqual( Matrix.zero_matrix((1,2)), Matrix( [[0,0]]                  ) )
-        self.assertEqual( Matrix.zero_matrix((2,1)), Matrix( [[0],[0]]                  ) )
-        self.assertEqual( Matrix.zero_matrix((3,1)), Matrix( [[0],[0],[0]]                ) )
+        self.assertEqual( Matrix.zero_matrix((1,2)), Matrix( [[0,0]]                ) )
+        self.assertEqual( Matrix.zero_matrix((2,1)), Matrix( [[0],[0]]              ) )
+        self.assertEqual( Matrix.zero_matrix((3,1)), Matrix( [[0],[0],[0]]          ) )
         self.assertEqual( Matrix.zero_matrix((3,2)), Matrix( [[0,0],[0,0],[0,0]]    ) )
         self.assertEqual( Matrix.zero_matrix((2,3)), Matrix( [[0,0,0],[0,0,0]]      ) )
         
@@ -103,12 +103,16 @@ class TestStringMethods(unittest.TestCase):
 
     # transpose tests ----------------------------------------------------
     def test_transpose(self):
-        self.assertEqual( Matrix(list_a).transpose(), Matrix(list_a) )
-        self.assertEqual( Matrix(list_f).transpose(), Matrix([[1,4],[2,5],[3,6]]) )
+        self.assertEqual( Matrix(list_10).transpose(), Matrix([[]])                 )
+        self.assertEqual( Matrix(list_11).transpose(), Matrix([[1,2,3,4]])          )
+        self.assertEqual( Matrix(list_12).transpose(), Matrix([[1],[2],[3]])        )
+        self.assertEqual( Matrix(list_21).transpose(), Matrix([[1,4],[2,5],[3,6]])  )
+        self.assertEqual( Matrix(list_22).transpose(), Matrix([[1,2,3,4]])          )
+        self.assertEqual( Matrix(list_23).transpose(), Matrix([[1,2,3,4]])          )
 
-    # dot product --------------------------------------------------------
-    def test_vec_vec_dot_product(self):
-        self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
+    # # dot product --------------------------------------------------------
+    # def test_vec_vec_dot_product(self):
+    #     self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
 
 # Make the test results print --------------------------------------------
 

@@ -108,14 +108,10 @@ class Matrix:
         if not self.empty:
 
             transposed_list = []  
-            ##
+            
             for col_n in range(self.size[1]):
                 transposed_list.append( [row[col_n] for row in self.final_matrix] )
 
-            # for row_num, row_list in enumerate(self.final_matrix):
-            #     for col_num, col_ele in enumerate(row_list):
-
-            #         transposed_list[col_num].append(col_ele) 
         else:
             transposed_list = self.final_matrix
             
@@ -174,16 +170,8 @@ class Matrix:
         """
         equality check for matrices 
         """
-        
-        # load the core lists stored in the data-type
-        core_list_a = self.final_matrix
-        core_list_b = self.final_matrix
-
-        # check if the internally stored lists are equal
-        if core_list_a == core_list_b:
-            return True
-        else: 
-            return False
+           
+        return self.final_matrix == other.final_matrix
     
     ## constructor ------------------------------------------------------
     def __init__(self, input_list):
