@@ -38,5 +38,11 @@ print( Matrix(list_11).transpose() )
 print( Matrix(list_12) )
 print( Matrix(list_12).transpose() )
 
-print( Matrix(list_12) )
-print( Matrix(list_12).transpose() )
+print( Matrix(list_21) )
+print( Matrix(list_21).transpose() )
+
+print( Matrix(list_22) )
+print( Matrix(list_22).transpose() )
+
+print( Matrix(list_23) )
+print( Matrix(list_23).transpose() )

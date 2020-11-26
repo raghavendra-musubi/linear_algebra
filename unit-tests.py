@@ -102,12 +102,8 @@ class TestStringMethods(unittest.TestCase):
     ## instance-method tests ---------------------------------------------
 
     # transpose tests ----------------------------------------------------
-    # vector transpose test
-    def test_transpose_list(self):
+    def test_transpose(self):
         self.assertEqual( Matrix(list_a).transpose(), Matrix(list_a) )
-
-    # matrix transpose test
-    def test_transpose_matrix(self):
         self.assertEqual( Matrix(list_f).transpose(), Matrix([[1,4],[2,5],[3,6]]) )
 
     # dot product --------------------------------------------------------

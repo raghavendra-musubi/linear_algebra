@@ -6,5 +6,6 @@
         "markdown",
         "latex",
         "plaintext"
-    ]
+    ],
+    "python.pythonPath": "/Users/musubimanagement/Documents/python-projects/linear_algebra/linear_algebra_library/bin/python3"
 }
