@@ -56,63 +56,63 @@ class TestStringMethods(unittest.TestCase):
 
     # empty-matrix test
     def test_empty(self):
-        self.assertTrue(Matrix.is_empty(list_o))
-        self.assertFalse(Matrix.is_empty(list_a))
-        self.assertFalse(Matrix.is_empty(list_b))
-        self.assertFalse(Matrix.is_empty(list_c))
-        self.assertFalse(Matrix.is_empty(list_d))
+        self.assertTrue(    Matrix.is_empty(list_10)    )
+        self.assertFalse(   Matrix.is_empty(list_00)    )
+        self.assertFalse(   Matrix.is_empty(list_01)    )
 
     # nested-list test 
     def test_nested_list(self):
-        self.assertTrue(Matrix.is_nested_list(list_b))
-        self.assertTrue(Matrix.is_nested_list(list_c))
-        self.assertFalse(Matrix.is_nested_list(list_a))
+        self.assertTrue(    Matrix.is_nested_list(list_11)  )
+        self.assertTrue(    Matrix.is_nested_list(list_21)  )
+        self.assertFalse(   Matrix.is_nested_list(list_01)  )
+        self.assertFalse(   Matrix.is_nested_list(list_02)  )
 
     # rectangular check test 
     def test_rectangular(self):
-        self.assertTrue( Matrix.is_rectangular(list_b))
-        self.assertFalse( Matrix.is_rectangular(list_e))
+        self.assertTrue(    Matrix.is_rectangular(list_22) )
+        self.assertFalse(   Matrix.is_rectangular(list_04) )
 
     # numeric list check test 
-    def test_rectangular(self):
-        self.assertTrue( Matrix.is_rectangular(list_b))
-        self.assertFalse( Matrix.is_rectangular(list_e))
+    def test_numeric_only(self):
+        self.assertTrue(    Matrix.is_numeric_list(list_01)    )
+        self.assertFalse(   Matrix.is_numeric_list(list_02)    )
 
     # size function test
     def test_size(self):
-        self.assertEqual( Matrix.size(list_b), (4,1))
-
-    # numeric-only-list test
-    def test_numeric_only(self):
-        self.assertTrue( Matrix.size(list_b))
+        self.assertEqual(   Matrix.get_size(list_10), (0,0)   )
+        self.assertEqual(   Matrix.get_size(list_11), (4,1)   )
+        self.assertEqual(   Matrix.get_size(list_12), (1,3)   )
+        self.assertEqual(   Matrix.get_size(list_21), (2,3)   )
 
     # dim check function test
     def test_dim_check(self):
-        self.assertFalse( Matrix.dim_check_for_mult(Matrix(list_f),Matrix(list_g)) )
-        self.assertTrue( Matrix.dim_check_for_mult(Matrix(list_f),Matrix(list_h)) )
-
+        self.assertFalse( Matrix.dim_check_for_mult( Matrix(list_21), Matrix(list_22)) )
+        self.assertFalse( Matrix.dim_check_for_mult( Matrix(list_23), Matrix(list_22)) )
+        self.assertTrue( Matrix.dim_check_for_mult( Matrix(list_22), Matrix(list_23)) )
+        self.assertTrue( Matrix.dim_check_for_mult( Matrix(list_11), Matrix(list_12)) )
+        
     # test zero matrix generator
     def test_zero_matrix(self):
-        self.assertEqual( Matrix((1,2)), Matrix( [0,0]                  ) )
-        self.assertEqual( Matrix((2,1)), Matrix( [0,0]                  ) )
-        self.assertEqual( Matrix((3,1)), Matrix( [0,0,0]                ) )
-        self.assertEqual( Matrix((3,2)), Matrix( [[0,0],[0,0],[0,0]]    ) )
-        self.assertEqual( Matrix((2,3)), Matrix( [[0,0,0],[0,0,0]]      ) )
+        self.assertEqual( Matrix.zero_matrix((1,2)), Matrix( [[0,0]]                  ) )
+        self.assertEqual( Matrix.zero_matrix((2,1)), Matrix( [[0],[0]]                  ) )
+        self.assertEqual( Matrix.zero_matrix((3,1)), Matrix( [[0],[0],[0]]                ) )
+        self.assertEqual( Matrix.zero_matrix((3,2)), Matrix( [[0,0],[0,0],[0,0]]    ) )
+        self.assertEqual( Matrix.zero_matrix((2,3)), Matrix( [[0,0,0],[0,0,0]]      ) )
         
-    ## instance-method tests ---------------------------------------------
+    # ## instance-method tests ---------------------------------------------
 
-    # transpose tests ----------------------------------------------------
-    # vector transpose test
-    def test_transpose_list(self):
-        self.assertEqual( Matrix(list_a).transpose(), Matrix(list_a) )
+    # # transpose tests ----------------------------------------------------
+    # # vector transpose test
+    # def test_transpose_list(self):
+    #     self.assertEqual( Matrix(list_a).transpose(), Matrix(list_a) )
 
-    # matrix transpose test
-    def test_transpose_matrix(self):
-        self.assertEqual( Matrix(list_f).transpose(), Matrix([[1,4],[2,5],[3,6]]) )
+    # # matrix transpose test
+    # def test_transpose_matrix(self):
+    #     self.assertEqual( Matrix(list_f).transpose(), Matrix([[1,4],[2,5],[3,6]]) )
 
-    # dot product --------------------------------------------------------
-    def test_vec_vec_dot_product(self):
-        self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
+    # # dot product --------------------------------------------------------
+    # def test_vec_vec_dot_product(self):
+    #     self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
 
 # Make the test results print --------------------------------------------
 

@@ -59,28 +59,42 @@ class Matrix:
         
     # calculate size ----------------------------------------------------
     @staticmethod
-    def size(input_list):
+    def get_size(input_list):
         """
         computes the size of a verified vector or 2D matrix
         """
-        num_of_rows = len(input_list)
-        num_of_cols = len(input_list[0])
-        return (num_of_rows,num_of_cols)
+        if Matrix.is_empty(input_list):
+            num_of_rows = 0
+            num_of_cols = 0
+        else:   
+            num_of_rows = len(input_list)
+            num_of_cols = len(input_list[0])
+        
+        return (num_of_rows, num_of_cols)
 
     # check multiplication compatibility -------------------------------
     @staticmethod
-    def dim_check_for_mult(input_matrix_type_a, input_matrix_type_b):
-        size_a = input_matrix_type_a.size
-        size_b = input_matrix_type_b.size
+    def dim_check_for_mult(input_matrix_a, input_matrix_b):
 
-        if size_a[1] == size_b[0]:
-            return True
-        else: 
-            return False
+        try:
+            size_a = input_matrix_a.size
+            size_b = input_matrix_b.size
+
+            print()
+
+            if size_a[1] == size_b[0]:
+                return True
+            else: 
+                return False
+        except:
+            raise Exception("Input type is not Matrix type")
 
     # generate zero matrix ----------------------------------------------
     @staticmethod
     def zero_matrix(size_tuple):
+        """
+        input a tuple with size of zero matrix to generate
+        """
         return Matrix([ [0 for col in range(size_tuple[1]) ] for row in range(size_tuple[0]) ])
 
     ## instance-methods ------------------------------------------------
@@ -89,7 +103,7 @@ class Matrix:
         """
         outputs a copy of the transpose of the input matrix
         """
-        # print(self.__dict__)
+
         if self.is_vector:
             return self
 
@@ -123,39 +137,31 @@ class Matrix:
         """
         print out a Matrix data-type like a matrix in the CLI
         """
+        try:
 
-        string_to_print = '\n'
-        
-        if self.empty:
+            string_to_print = '\n'
+            
+            if self.empty:
 
-            string_to_print += '|  |\n'
+                string_to_print += '|  |\n'
 
-            return string_to_print
+                return string_to_print
 
-        # print vector 
-        elif self.is_vector:
+            else:
 
-            for ele in self.final_matrix:
-                string_to_print += '| ' + str(ele) + ' |\n'
+                for row in self.final_matrix:
 
-            return string_to_print
-        
-        # print matrix
-        elif self.is_matrix:
+                    string_to_print += '| '
 
-            for row in self.final_matrix:
+                    for ele in row:
+                        string_to_print +=  str(ele) + ' '
 
-                string_to_print += '| '
+                    string_to_print += '|\n'
 
-                for ele in row:
-                    string_to_print +=  str(ele) + ' '
-
-                string_to_print += '|\n'
-
-            return string_to_print
+                return string_to_print
 
         # throw error
-        else:
+        except:
             raise Exception('Cannot print Matrix!')
             
     def __eq__(self, other):
@@ -197,17 +203,24 @@ class Matrix:
             # if input list is not empty ------------------------------------
             else:
                 
-                # check if each nested list is numeric 
-                
-                # set empty flag
-                self.empty = True
+                try:
 
-                # save core values of matrix
-                self.final_matrix = input_list
+                    # check rectangular and numeric nested lists
+                    if Matrix.is_rectangular(input_list) and all([ Matrix.is_numeric_list(nested_list) for nested_list in input_list  ]):
 
-                # set size of matrix
-                self.size = (0,0)
-        
+                        # set empty flag
+                        self.empty = False
+
+                        # save core values of matrix
+                        self.final_matrix = input_list
+
+                        # set size of matrix
+                        self.size = Matrix.get_size(input_list)
+
+                except:
+
+                    raise Exception("Input list is either not rectangular like a Matrix or the nested lists are not all numeric!")
+            
         # if input list is not nested
         else:
             raise Exception("Input list needs to be nested list where inner lists are rows of matrix")
