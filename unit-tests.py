@@ -99,20 +99,20 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix.zero_matrix((3,2)), Matrix( [[0,0],[0,0],[0,0]]    ) )
         self.assertEqual( Matrix.zero_matrix((2,3)), Matrix( [[0,0,0],[0,0,0]]      ) )
         
-    # ## instance-method tests ---------------------------------------------
+    ## instance-method tests ---------------------------------------------
 
-    # # transpose tests ----------------------------------------------------
-    # # vector transpose test
-    # def test_transpose_list(self):
-    #     self.assertEqual( Matrix(list_a).transpose(), Matrix(list_a) )
+    # transpose tests ----------------------------------------------------
+    # vector transpose test
+    def test_transpose_list(self):
+        self.assertEqual( Matrix(list_a).transpose(), Matrix(list_a) )
 
-    # # matrix transpose test
-    # def test_transpose_matrix(self):
-    #     self.assertEqual( Matrix(list_f).transpose(), Matrix([[1,4],[2,5],[3,6]]) )
+    # matrix transpose test
+    def test_transpose_matrix(self):
+        self.assertEqual( Matrix(list_f).transpose(), Matrix([[1,4],[2,5],[3,6]]) )
 
-    # # dot product --------------------------------------------------------
-    # def test_vec_vec_dot_product(self):
-    #     self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
+    # dot product --------------------------------------------------------
+    def test_vec_vec_dot_product(self):
+        self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
 
 # Make the test results print --------------------------------------------
 

@@ -3,43 +3,40 @@
 #-----------------------------------------------------------------------
 
 # Imports --------------------------------------------------------------
+
 from matrix import Matrix
 
-# empty list
-list_o = []
+## 01. valid inputs ---------------------------------
 
-# vector list
-list_a = [1,2,3,4]
+# empty vector
+list_10 = [[]]
 
-# matrix list
-list_a = [1,2,3,4]
+# 4x1 col vector
+list_11 = [[1],[2],[3],[4]]
 
-# 2x3 matrix for transpose 
-list_f = [[1,2,3],[4,5,6]]
+# 1x3 row vector
+list_12 = [[1,2,3]]
 
-# 4x3 matrix for transpose 
-list_g = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+# 2x3 matrix  
+list_21 = [[1,2,3],[4,5,6]]
 
-# 3x3 matrix for transpose 
-list_h = [[1,2,3],[4,5,6],[7,8,9]]
+# 4x3 matrix  
+list_22 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+
+# 3x3 matrix  
+list_23 = [[1,2,3],[4,5,6],[7,8,9]]
+
 
 # Tests --------------------------------------------------------------
 
-# empty matrix transpose
-print(Matrix(list_o))
-print(Matrix(list_o).transpose())
+print( Matrix(list_10) )
+print( Matrix(list_10).transpose() )
 
-# vector transpose 
-print(Matrix(list_a))
-print(Matrix(list_a).transpose())
+print( Matrix(list_11) )
+print( Matrix(list_11).transpose() )
 
-# matrix transpose 
-print(Matrix(list_f))
-print(Matrix(list_f).transpose())
+print( Matrix(list_12) )
+print( Matrix(list_12).transpose() )
 
-print(Matrix(list_g))
-print(Matrix(list_g).transpose())
-
-print(Matrix(list_h))
-print(Matrix(list_h).transpose())
-
+print( Matrix(list_12) )
+print( Matrix(list_12).transpose() )

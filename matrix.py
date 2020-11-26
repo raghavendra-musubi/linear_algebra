@@ -16,6 +16,7 @@ class Matrix:
         - row vector: [[1,2,3,4]]
         - col vector: [[1],[2],[3],[4]]
         - 2X3 matrix: [[1,2,3],[4,5,6]]
+        - empty matrix: [[]]
     '''
 
     ## static-methods/helper functions ----------------------------------
@@ -104,16 +105,21 @@ class Matrix:
         outputs a copy of the transpose of the input matrix
         """
 
-        if self.is_vector:
-            return self
+        if not self.empty:
 
-        elif self.is_matrix:
-            transposed_list = []
-
+            transposed_list = []  
+            ##
             for col_n in range(self.size[1]):
-                transposed_list.append([row[col_n] for row in self.final_matrix])
+                transposed_list.append( [row[col_n] for row in self.final_matrix] )
 
-            return Matrix(transposed_list)
+            # for row_num, row_list in enumerate(self.final_matrix):
+            #     for col_num, col_ele in enumerate(row_list):
+
+            #         transposed_list[col_num].append(col_ele) 
+        else:
+            transposed_list = self.final_matrix
+            
+        return Matrix(transposed_list)
 
     def copy(self):
         """
