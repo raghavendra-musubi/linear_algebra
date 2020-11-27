@@ -115,8 +115,8 @@ class TestStringMethods(unittest.TestCase):
         self.assertNotEqual(    Matrix(list_21).transpose(), Matrix([[1,2,3,4]])                       )
 
     # dot product --------------------------------------------------------
-    def test_vec_vec_dot_product(self):
-        self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
+    def test_dot_product(self):
+        self.assertEqual( Matrix(list_22).dot(Matrix(list_23)), Matrix([[30,36,42],[66,81,96],[102,126,150],[138,171,204]]))
 
 # Make the test results print --------------------------------------------
 

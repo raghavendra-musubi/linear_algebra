@@ -143,15 +143,13 @@ class Matrix:
                 product_list.append([])
 
                 for col_num, col in enumerate(m2): 
-                    # print(row,col)
-                    # ele = list(map( lambda x,y: x * y, zip(row,col) ))
+
                     ele = [ x * y for x,y in zip(row,col) ]
-                    # print(ele)
+
                     sum_ele = sum(ele)
 
                     product_list[row_num].append(sum_ele)
-
-            # print(product_list)
+                    
             return Matrix(product_list) 
         
         else:
