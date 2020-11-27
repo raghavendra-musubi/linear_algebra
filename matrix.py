@@ -81,8 +81,6 @@ class Matrix:
             size_a = input_matrix_a.size
             size_b = input_matrix_b.size
 
-            print()
-
             if size_a[1] == size_b[0]:
                 return True
             else: 
@@ -130,8 +128,34 @@ class Matrix:
             - matrix * vector 
             - vector * matrix 
             - matrix * matrix
-        """        
-        pass
+        """
+
+        if Matrix.dim_check_for_mult(self,other):
+            
+            # preparing both matrices for multiplication
+            m1 = self.final_matrix
+            m2 = other.transpose().final_matrix
+            
+            product_list = []
+
+            for row_num, row in enumerate(m1):
+
+                product_list.append([])
+
+                for col_num, col in enumerate(m2): 
+                    # print(row,col)
+                    # ele = list(map( lambda x,y: x * y, zip(row,col) ))
+                    ele = [ x * y for x,y in zip(row,col) ]
+                    # print(ele)
+                    sum_ele = sum(ele)
+
+                    product_list[row_num].append(sum_ele)
+
+            # print(product_list)
+            return Matrix(product_list) 
+        
+        else:
+            raise Exception(" Matrix multiplication is not possible because of dimension mismatch! ")
 
     ## dunder-methods --------------------------------------------------
 
@@ -170,7 +194,7 @@ class Matrix:
         """
         equality check for matrices 
         """
-           
+
         return self.final_matrix == other.final_matrix
     
     ## constructor ------------------------------------------------------

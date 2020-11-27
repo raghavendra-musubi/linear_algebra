@@ -98,21 +98,25 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix.zero_matrix((3,1)), Matrix( [[0],[0],[0]]          ) )
         self.assertEqual( Matrix.zero_matrix((3,2)), Matrix( [[0,0],[0,0],[0,0]]    ) )
         self.assertEqual( Matrix.zero_matrix((2,3)), Matrix( [[0,0,0],[0,0,0]]      ) )
-        
+
+    # # test dim check for multiplication
+    # def test_
+
     ## instance-method tests ---------------------------------------------
 
     # transpose tests ----------------------------------------------------
     def test_transpose(self):
-        self.assertEqual( Matrix(list_10).transpose(), Matrix([[]])                 )
-        self.assertEqual( Matrix(list_11).transpose(), Matrix([[1,2,3,4]])          )
-        self.assertEqual( Matrix(list_12).transpose(), Matrix([[1],[2],[3]])        )
-        self.assertEqual( Matrix(list_21).transpose(), Matrix([[1,4],[2,5],[3,6]])  )
-        self.assertEqual( Matrix(list_22).transpose(), Matrix([[1,2,3,4]])          )
-        self.assertEqual( Matrix(list_23).transpose(), Matrix([[1,2,3,4]])          )
+        self.assertEqual(       Matrix(list_10).transpose(), Matrix([[]])                              )
+        self.assertEqual(       Matrix(list_11).transpose(), Matrix([[1,2,3,4]])                       )
+        self.assertEqual(       Matrix(list_12).transpose(), Matrix([[1],[2],[3]])                     )
+        self.assertEqual(       Matrix(list_21).transpose(), Matrix([[1,4],[2,5],[3,6]])               )
+        self.assertEqual(       Matrix(list_22).transpose(), Matrix([[1,4,7,10],[2,5,8,11],[3,6,9,12]]))
+        self.assertNotEqual(    Matrix(list_22).transpose(), Matrix([[1,2,3,4]])                       )
+        self.assertNotEqual(    Matrix(list_21).transpose(), Matrix([[1,2,3,4]])                       )
 
-    # # dot product --------------------------------------------------------
-    # def test_vec_vec_dot_product(self):
-    #     self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
+    # dot product --------------------------------------------------------
+    def test_vec_vec_dot_product(self):
+        self.assertEqual( Matrix([1,2,3]), Matrix([3,4,5]) )
 
 # Make the test results print --------------------------------------------
 
