@@ -117,7 +117,10 @@ class TestStringMethods(unittest.TestCase):
     # dot product --------------------------------------------------------
     def test_dot_product(self):
         self.assertEqual( Matrix(list_22).dot(Matrix(list_23)), Matrix([[30,36,42],[66,81,96],[102,126,150],[138,171,204]]))
+        self.assertEqual( Matrix(list_21).dot(Matrix(list_23)), Matrix([[30,36,42],[66,81,96]]))
+        self.assertEqual( Matrix([[1]]).dot(Matrix([[3]])), Matrix([[3]]))
 
+    
 # Make the test results print --------------------------------------------
 
 if __name__ == '__main__':

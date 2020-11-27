@@ -149,7 +149,7 @@ class Matrix:
                     sum_ele = sum(ele)
 
                     product_list[row_num].append(sum_ele)
-                    
+
             return Matrix(product_list) 
         
         else:
@@ -194,6 +194,46 @@ class Matrix:
         """
 
         return self.final_matrix == other.final_matrix
+
+    def __add__(self, other):
+        '''
+        add two matrices of the same size
+        '''
+
+        if self.size == other.size:
+            
+            summed_list = Matrix.zero_matrix(self.size).final_matrix
+
+            for row_num, row_val in enumerate(self.final_matrix):
+                for col_num, col_val in enumerate(row_val):
+                    summed_list[row_num][col_num] = self.final_matrix[row_num][col_num] + other.final_matrix[row_num][col_num]
+
+            return Matrix(summed_list)
+
+        else:
+            raise Exception("Matrix dimension must match for matrix addition!")
+        
+
+    def __sub__(self, other):
+        '''
+        find difference between matrices of the same size
+        '''
+
+        if self.size == other.size:
+            
+            difference_list = Matrix.zero_matrix(self.size).final_matrix
+
+            for row_num, row_val in enumerate(self.final_matrix):
+                for col_num, col_val in enumerate(row_val):
+                    difference_list[row_num][col_num] = self.final_matrix[row_num][col_num] - other.final_matrix[row_num][col_num]
+
+            return Matrix(difference_list)
+
+        else:
+            raise Exception("Matrix dimension must match for matrix subtraction!")
+        
+
+
     
     ## constructor ------------------------------------------------------
     def __init__(self, input_list):
