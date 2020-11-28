@@ -194,10 +194,41 @@ class Matrix:
     # compute the multiplication of a scalar with Matrix
     def scale(self, int_scalar):
         '''
-        scale all matrix elements with the input scalar
+        scale all Matrix elements with the input scalar
         '''
 
         return Matrix([ list(map(lambda x:x * int_scalar,row)) for row in self.final_matrix ])
+
+    # check if matrix is anti-symmetric
+    def is_antisymmetric(self):
+        '''
+        checks if matrix is anti-symmetric
+        '''
+        return self == self.transpose().scale(-1)
+
+    # compute trace of matrix
+    def trace(self):
+        '''
+        computes sum of diagonals in a square matrix
+        '''
+        if self.is_square:
+            return sum( [ self.final_matrix[i][i]  for i in range(len(self.final_matrix))  ] ) 
+
+    # compute the p-norm of a vector
+    def vec_norm(self, p=2):
+        '''
+        compute the p-norm of a vector 
+        '''
+        if self.is_vector and self.size[0] == 1: # row vector
+
+            return ( sum([ (abs(ele))**p for ele in self.final_matrix[0] ]) )**(1/p)
+
+        elif self.is_vector and self.size[1] == 1: # column vector
+            
+            return ( sum([ (abs(ele[0]))**p for ele in self.final_matrix ]) )**(1/p)
+
+        else:
+            raise Exception("This method only does p-norm for vectors!")
 
 
     ## dunder-methods --------------------------------------------------
@@ -258,7 +289,6 @@ class Matrix:
         else:
             raise Exception("Matrix dimension must match for matrix addition!")
         
-
     def __sub__(self, other):
         '''
         compute difference between matrices of the same size
@@ -304,8 +334,14 @@ class Matrix:
                 # set size of matrix
                 self.size = (0,0)
 
+                # set is_vector 
+                self.is_vector = False
+
                 # set square matrix flag 
                 self.is_square = True
+
+                # set vector as true
+                self.is_vector = True
         
             # if input list is not empty ------------------------------------
             else:
@@ -323,6 +359,11 @@ class Matrix:
 
                         # set size of matrix
                         self.size = Matrix.get_size(input_list)
+
+                        # set is_vector flag
+                        if self.size[0] == 1 and self.size[1] != 1 or self.size[1] == 1 and self.size[0] != 1:
+                            self.is_vector = True
+                        else: self.is_vector = False
 
                         # set square matrix flag 
                         if self.size[0] == self.size[1]: self.is_square = True
