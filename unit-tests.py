@@ -34,12 +34,14 @@ list_10 = [[]]
 
 # 4x1 col vector
 list_11 = [[1],[2],[3],[4]]
+list_11a = [[5],[6],[7],[8]]
 
 # 1x3 row vector
 list_12 = [[1,2,3]]
 
 # 2x3 matrix  
 list_21 = [[1,2,3],[4,5,6]]
+list_21a = [[7,8,9],[10,11,12]]
 
 # 4x3 matrix  
 list_22 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
@@ -47,6 +49,16 @@ list_22 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
 # 3x3 matrix  
 list_23 = [[1,2,3],[4,5,6],[7,8,9]]
 
+## symmetric matrices
+
+# 2x2
+list_31 = [[9,7],[7,6]]
+
+# 3x3
+list_32 = [[2,0,6],[0,8,2],[6,2,9]]
+
+# 4x4
+list_33 = [[1,6,3,4],[6,1,1,1],[3,1,3,2],[4,1,2,6]]
 
 ## Unit Tests -----------------------------------------------------------
 
@@ -99,8 +111,12 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix.zero_matrix((3,2)), Matrix( [[0,0],[0,0],[0,0]]    ) )
         self.assertEqual( Matrix.zero_matrix((2,3)), Matrix( [[0,0,0],[0,0,0]]      ) )
 
-    # # test dim check for multiplication
-    # def test_
+    # test identity matrix generator 
+    def test_id_matrix(self):
+        self.assertEqual( Matrix.id_matrix(1), Matrix([[1]]) )
+        self.assertEqual( Matrix.id_matrix(3), Matrix([[1,0,0],[0,1,0],[0,0,1]]) )
+        self.assertEqual( Matrix.id_matrix(5), Matrix([[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]]) )
+
 
     ## instance-method tests ---------------------------------------------
 
@@ -120,7 +136,32 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix(list_21).dot(Matrix(list_23)), Matrix([[30,36,42],[66,81,96]]))
         self.assertEqual( Matrix([[1]]).dot(Matrix([[3]])), Matrix([[3]]))
 
+    # is_symmetric method test -------------------------------------------
+    def test_is_symmetric(self):
+        self.assertTrue( Matrix(list_31).is_symmetric() )
+        self.assertTrue( Matrix(list_32).is_symmetric() )
+        self.assertTrue( Matrix(list_33).is_symmetric() )
+        self.assertFalse( Matrix(list_23).is_symmetric() )
+        # self.assertRaises( Exception('Only square matrices can be symmetric!') , Matrix(list_22).is_symmetric() )
+
+    ## operator-overloading tests ---------------------------------------------
     
+    # add matrices 
+    def test_add_matrices(self):
+        self.assertEqual(   ( Matrix(list_11) + Matrix(list_11a) ) , Matrix([[6],[8],[10],[12]]) ) 
+        self.assertEqual(   ( Matrix(list_21) + Matrix(list_21a) ) , Matrix([[8, 10, 12], [14, 16, 18]]) ) 
+
+    # subtract matrices 
+    def test_sub_matrices(self):
+        self.assertEqual(   ( Matrix(list_11a) - Matrix(list_11) ) , Matrix([[4],[4],[4],[4]]) ) 
+        self.assertEqual(   ( Matrix(list_21a) - Matrix(list_21) ) , Matrix([[6, 6, 6], [6, 6, 6]]) ) 
+  
+    # multiply matrices 
+    def test_mul_matrices(self):
+        self.assertEqual( (Matrix(list_22) * Matrix(list_23)), Matrix([[30,36,42],[66,81,96],[102,126,150],[138,171,204]]))
+        self.assertEqual( (Matrix(list_21) * Matrix(list_23)), Matrix([[30,36,42],[66,81,96]]))
+        self.assertEqual( (Matrix([[1]]) * Matrix([[3]])), Matrix([[3]]))
+
 # Make the test results print --------------------------------------------
 
 if __name__ == '__main__':
