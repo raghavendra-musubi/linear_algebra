@@ -63,6 +63,9 @@ list_33 = [[1,6,3,4],[6,1,1,1],[3,1,3,2],[4,1,2,6]]
 ## anti-symmetric matrix 
 list_34 = [[0,-1],[1,0]]
 
+## 03. other generic matrices -------------------------------------------
+list_33a = [[10,60,30],[50,20,70],[40,80,90]]
+
 ## Unit Tests -----------------------------------------------------------
 
 class TestStringMethods(unittest.TestCase):
@@ -191,7 +194,11 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( (Matrix(list_21) * Matrix(list_23)), Matrix([[30,36,42],[66,81,96]]))
         self.assertEqual( (Matrix([[1]]) * Matrix([[3]])), Matrix([[3]]))
 
-
+    # element access 
+    def test_element_access(self):
+        self.assertEqual( Matrix(list_33a)[1,2], 70 )
+        self.assertEqual( Matrix(list_33a)[0,1], 60 )
+        
 # Make the test results print --------------------------------------------
 
 if __name__ == '__main__':

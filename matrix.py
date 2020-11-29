@@ -317,10 +317,14 @@ class Matrix:
         '''
         takes a tuple containing the row and column index to output 
         '''
-        print(key)
-        print(len(key))
+        row_num = key[0]
+        col_num = key[1]
 
-        print(type(key[0]))
+        if isinstance(row_num, int) and isinstance(col_num, int):
+            return self.final_matrix[row_num][col_num]
+        else:
+            raise ValueError("No support for slicing operations yet!")
+
 
     ## constructor ------------------------------------------------------
     def __init__(self, input_list):
