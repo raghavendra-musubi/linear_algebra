@@ -313,6 +313,15 @@ class Matrix:
         '''
         return self.dot(other)
 
+    def __getitem__(self, key):
+        '''
+        takes a tuple containing the row and column index to output 
+        '''
+        print(key)
+        print(len(key))
+
+        print(type(key[0]))
+
     ## constructor ------------------------------------------------------
     def __init__(self, input_list):
         '''
