@@ -117,7 +117,38 @@ class Matrix:
             return Matrix(return_list)
 
         else: raise Exception("Identity-Matrix size must be specified in int type!")
-        
+    
+    # compute determinant (up to 3x3) -----------------------------------
+    @staticmethod
+    def det(input_matrix):
+        '''
+        compute determinant of 1x1, 2x2, or 3x3 matrices
+        '''
+
+        # check if matrix is square
+        if input_matrix.is_square:
+
+            # size 1x1 determinant
+            if input_matrix.size[0] == 1:
+                return input_matrix[[0]]
+
+            # size 2x2 determinant
+            elif input_matrix.size[0] == 2:
+                return input_matrix[1,1]*input_matrix[2,2] - input_matrix[1,2]*input_matrix[2,1] 
+
+            # size 3x3 determinant
+            elif input_matrix.size[0] == 3:
+                final_det = 0
+
+                pass
+
+
+
+            else:
+                raise ValueError("Only 3x3 matrices or less is accessible ")
+        else:
+            raise ValueError("Only square matrices have determinants!")
+
 
     ## instance-methods ------------------------------------------------
 
@@ -317,13 +348,43 @@ class Matrix:
         '''
         takes a tuple containing the row and column index to output 
         '''
-        row_num = key[0]
-        col_num = key[1]
 
-        if isinstance(row_num, int) and isinstance(col_num, int):
-            return self.final_matrix[row_num][col_num]
-        else:
-            raise ValueError("No support for slicing operations yet!")
+        try:
+            row_num = key[0]
+            col_num = key[1]
+
+            # print(row_num)
+            # print(col_num)
+
+            # ele row and ele col
+            if isinstance(row_num, int) and isinstance(col_num, int):
+
+                return self.final_matrix[row_num][col_num]
+
+            # slice row and slice col
+            elif isinstance(row_num, slice) and isinstance(col_num, slice): 
+                
+                output = self.final_matrix[row_num]
+                output = Matrix(output).transpose()
+                output = Matrix(output.final_matrix[col_num])
+                return output.transpose()
+
+            # ele row and slice col
+            elif isinstance(row_num, int) and isinstance(col_num, slice):
+                
+                output = self.final_matrix[row_num][col_num]
+                return Matrix([output]) 
+
+            # slice row and ele col
+            elif isinstance(row_num, slice) and isinstance(col_num, int):
+                
+
+                pass
+            
+
+
+        except:
+            raise IndexError("Cannot parse indexing provided!")
 
 
     ## constructor ------------------------------------------------------
