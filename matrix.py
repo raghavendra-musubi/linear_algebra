@@ -144,11 +144,11 @@ class Matrix:
 
                 for col_ind in range(input_matrix.size[1]):
 
-                    curr_cofactor = input_matrix.drop(row_ind,col_ind)
+                    curr_cofactor = Matrix.det(input_matrix.drop(row_ind,col_ind))
                     curr_multiplier = input_matrix[row_ind,col_ind]
                     curr_sign_setter = (-1)**( (row_ind + 1) + (col_ind + 1) )  
 
-                    final_det += curr_sign_setter * curr_multiplier * Matrix.det(curr_cofactor)
+                    final_det += curr_sign_setter * curr_multiplier * curr_cofactor
 
                 return final_det
 
