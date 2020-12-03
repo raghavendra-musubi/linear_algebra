@@ -64,7 +64,27 @@ list_33 = [[1,6,3,4],[6,1,1,1],[3,1,3,2],[4,1,2,6]]
 list_34 = [[0,-1],[1,0]]
 
 ## 03. other generic matrices -------------------------------------------
+
+# 3x3 matrix 
 list_33a = [[10,60,30],[50,20,70],[40,80,90]]
+
+# 4x4 matrix 
+list_44 = [[1,6,3,4],[6,9,1,1],[3,0,3,2],[4,1,2,6]]
+
+
+## 04. matrices whose determinants are known ---------------------------
+
+# 1x1 matrix whose determinant is (-4) -------------------------------
+list_51 = [[-4]]
+
+# 2x2 matrix whose determinant is (10) -------------------------------
+list_52 = [[4,1],[2,3]]
+
+# 3x3 matrix whose determinant is (-6) -------------------------------
+list_53 = [[-2,3,-1],[5,-1,4],[4,-8,2]]
+
+# 4x4 matrix whose determinant is (-279) -------------------------------
+list_54 = [[7,4,2,0],[6,3,-1,2],[4,6,2,5],[8,2,-7,1]]
 
 ## Unit Tests -----------------------------------------------------------
 
@@ -124,6 +144,12 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix.id_matrix(3), Matrix([[1,0,0],[0,1,0],[0,0,1]]) )
         self.assertEqual( Matrix.id_matrix(5), Matrix([[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]]) )
 
+    # test determinanat computation
+    def test_det_computation(self):
+        self.assertEqual( Matrix.det(Matrix(list_51)) , -4 )
+        self.assertEqual( Matrix.det(Matrix(list_52)) , 10 )
+        self.assertEqual( Matrix.det(Matrix(list_53)) , -6 )
+        self.assertEqual( Matrix.det(Matrix(list_54)) , -279 )
 
     ## instance-method tests ---------------------------------------------
 
@@ -176,6 +202,11 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix(list_12).vec_norm(), 3.7416573867739413 )
         self.assertEqual( Matrix(list_12).vec_norm(3), 3.3019272488946263 )
 
+    # test drop row and col -----------------------------------------------
+    def test_drop(self):
+        self.assertEqual(   Matrix(list_33a).drop(1,2), Matrix([[10,60],[40,80]])  )
+        self.assertEqual(   Matrix(list_44).drop(3,0),  Matrix([[6,3,4],[9,1,1],[0,3,2]]) )
+
     ## operator-overloading tests -----------------------------------------
     
     # add matrices 
@@ -196,8 +227,24 @@ class TestStringMethods(unittest.TestCase):
 
     # element access 
     def test_element_access(self):
+
+        # ele row - ele col
         self.assertEqual( Matrix(list_33a)[1,2], 70 )
         self.assertEqual( Matrix(list_33a)[0,1], 60 )
+
+        # slice row - slice col
+        self.assertEqual( Matrix(list_44)[1:3,1:4], Matrix([[9,1,1],[0,3,2]]) )
+        self.assertEqual( Matrix(list_44)[1:3,1:2], Matrix([[9],[0]]) )
+        self.assertEqual( Matrix(list_44)[3:1:-1,1:3], Matrix([[1,2],[0,3]]) )
+        self.assertEqual( Matrix(list_44)[1:3,3:1:-1], Matrix([[1,1],[2,3]]) )
+
+        # ele row - slice col
+        self.assertEqual( Matrix(list_44)[2,1:3], Matrix([[0,3]]) )
+        self.assertEqual( Matrix(list_44)[1,0:3], Matrix([[6,9,1]]) )
+
+        # slice row - ele col
+        self.assertEqual( Matrix(list_44)[1:3,1], Matrix([[9],[0]]) )
+        self.assertEqual( Matrix(list_44)[2:4,0], Matrix([[3],[4]]) )
         
 # Make the test results print --------------------------------------------
 

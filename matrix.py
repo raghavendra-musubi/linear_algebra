@@ -130,22 +130,28 @@ class Matrix:
 
             # size 1x1 determinant
             if input_matrix.size[0] == 1:
-                return input_matrix[[0]]
+                return input_matrix[0,0]
 
             # size 2x2 determinant
             elif input_matrix.size[0] == 2:
-                return input_matrix[1,1]*input_matrix[2,2] - input_matrix[1,2]*input_matrix[2,1] 
+                return input_matrix[0,0]*input_matrix[1,1] - input_matrix[0,1]*input_matrix[1,0] 
 
-            # size 3x3 determinant
-            elif input_matrix.size[0] == 3:
-                final_det = 0
+            # size 3x3 or more determinant
+            elif input_matrix.size[0] >= 3:
 
-                pass
+                final_det = 0 # init value of determinant
+                row_ind = 0 # expand along first row 
 
+                for col_ind in range(input_matrix.size[1]):
 
+                    curr_cofactor = input_matrix.drop(row_ind,col_ind)
+                    curr_multiplier = input_matrix[row_ind,col_ind]
+                    curr_sign_setter = (-1)**( (row_ind + 1) + (col_ind + 1) )  
 
-            else:
-                raise ValueError("Only 3x3 matrices or less is accessible ")
+                    final_det += curr_sign_setter * curr_multiplier * Matrix.det(curr_cofactor)
+
+                return final_det
+
         else:
             raise ValueError("Only square matrices have determinants!")
 
@@ -261,7 +267,19 @@ class Matrix:
         else:
             raise Exception("This method only does p-norm for vectors!")
 
+    # drop i-th row and j-th columns -------------------------------------
+    def drop(self,i,j):
+        '''
+        returns matrix with i-th row and j-th column dropped from the current matrix
+        '''
 
+        output = self.final_matrix.copy()
+        del output[i]
+        output = Matrix(output).transpose().final_matrix
+        del output[j]
+        return Matrix(output).transpose()
+
+    
     ## dunder-methods --------------------------------------------------
 
     def __str__(self):
@@ -353,9 +371,6 @@ class Matrix:
             row_num = key[0]
             col_num = key[1]
 
-            # print(row_num)
-            # print(col_num)
-
             # ele row and ele col
             if isinstance(row_num, int) and isinstance(col_num, int):
 
@@ -378,10 +393,10 @@ class Matrix:
             # slice row and ele col
             elif isinstance(row_num, slice) and isinstance(col_num, int):
                 
-
-                pass
-            
-
+                output = self.final_matrix[row_num]
+                output = Matrix(output).transpose()
+                output = output.final_matrix[col_num]
+                return Matrix([output]).transpose()
 
         except:
             raise IndexError("Cannot parse indexing provided!")

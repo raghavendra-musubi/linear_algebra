@@ -25,7 +25,7 @@ print(mat_b)
 
 # slice row and slice col access ----------------------------
 
-# # square and rectangular chunks 
+# square and rectangular chunks 
 # plucked_b = mat_b[1:3,1:4]
 # print(plucked_b)
 # plucked_b = mat_b[1:3,1:2]
@@ -36,12 +36,13 @@ print(mat_b)
 # print(plucked_b)
 
 # index row and sliced col access --------------------
-plucked_b = mat_b[2,1:3]
-print(plucked_b)
-plucked_b = mat_b[1,0:3]
-print(plucked_b)
-
-# slice row and index col access --------------------
-# plucked_b = mat_b[1:3,1]
+# plucked_b = mat_b[2,1:3]
+# print(plucked_b)
+# plucked_b = mat_b[1,0:3]
 # print(plucked_b)
 
+# slice row and index col access --------------------
+plucked_b = mat_b[1:3,1]
+print(plucked_b)
+plucked_b = mat_b[2:4,0]
+print(plucked_b)
