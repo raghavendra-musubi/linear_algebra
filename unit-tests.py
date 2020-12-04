@@ -86,6 +86,24 @@ list_53 = [[-2,3,-1],[5,-1,4],[4,-8,2]]
 # 4x4 matrix whose determinant is (-279) -------------------------------
 list_54 = [[7,4,2,0],[6,3,-1,2],[4,6,2,5],[8,2,-7,1]]
 
+inverse computation co
+## 05. matrices whose inverses are known -------------------------------
+
+# 1x1 matrix whose inverse exists ------------------------------------
+list_61 = [[4]]
+# inverse matrix is [[0.6, -0.7],[-0.2, 0.4]]
+
+
+# 2x2 matrix whose inverse exists ------------------------------------
+list_62 = [[4, 7],[2, 6]]
+# inverse matrix is [[0.6, -0.7],[-0.2, 0.4]]
+
+
+# 3x3 matrix whose inverse exists ------------------------------------
+list_63 = [[3, 0, 2],[2, 0, -2],[0, 1, 1]]
+# inverse matrix is [[0.2, 0.2, 0],[-0.2, 0.3, 1],[0.2, -0.3, 0]]
+
+
 ## Unit Tests -----------------------------------------------------------
 
 class TestStringMethods(unittest.TestCase):
@@ -153,10 +171,16 @@ class TestStringMethods(unittest.TestCase):
 
     # test adjoint computation
     def test_adj_computation(self):
-        self.assertEqual( Matrix.adj(Matrix(list_51)) , Matrix([[1]]) )
-        self.assertEqual( Matrix.adj(Matrix(list_52)) , Matrix([[3,-2],[-1,4]]) )
-        self.assertEqual( Matrix.adj(Matrix(list_53)) , Matrix([[30,6,-36],[2,0,-4],[11,3,-13]]) )
-        self.assertEqual( Matrix.adj(Matrix(list_54)) , Matrix([[15,-98,4,104],[-156,331,-116,-226],[54,-111,33,21],[42,-107,67,68]]) )
+        self.assertEqual( Matrix.adj(Matrix(list_51)) , Matrix([[1]]).transpose() )
+        self.assertEqual( Matrix.adj(Matrix(list_52)) , Matrix([[3,-2],[-1,4]]).transpose() )
+        self.assertEqual( Matrix.adj(Matrix(list_53)) , Matrix([[30,6,-36],[2,0,-4],[11,3,-13]]).transpose() )
+        self.assertEqual( Matrix.adj(Matrix(list_54)) , Matrix([[15,-98,4,104],[-156,331,-116,-226],[54,-111,33,21],[42,-107,67,68]]).transpose() )
+
+    # compute inverse of matrix 
+    def test_inv_computation(self):
+        self.assertEqual( Matrix.inv(Matrix(list_61)) , Matrix([[0.25]]) )
+        self.assertEqual( Matrix.inv(Matrix(list_62)) , Matrix([[0.6000000000000001, -0.7000000000000001],[-0.2, 0.4]]) )
+        self.assertEqual( Matrix.inv(Matrix(list_63)) , Matrix([[0.2, 0.2, 0.0],[-0.2, 0.30000000000000004, 1.0],[0.2, -0.30000000000000004, 0.0 ]]) )
 
     ## instance-method tests ---------------------------------------------
 

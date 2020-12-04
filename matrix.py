@@ -181,10 +181,28 @@ class Matrix:
                         curr_sign_setter = (-1)**( (row_num + 1) + (col_num + 1) )  
                         output[row_num][col_num] = curr_sign_setter * Matrix.det(input_matrix.drop(row_num,col_num))
                         
-                return Matrix(output)
+                return Matrix(output).transpose()
                     
         else:
             raise TypeError("Classic adjoint can be computed only for square matrices!")
+
+    # compute inverse of matrix ---------------------------------------
+    @staticmethod
+    def inv(input_matrix):
+        '''
+        compute the inverse of a given square matrix 
+        '''        
+
+        if input_matrix.is_square:
+
+            if Matrix.det(input_matrix) != 0:
+                 
+                return Matrix.adj(input_matrix).scale(1/Matrix.det(input_matrix))
+
+            else:
+                raise ValueError("Determinant of given Matrix is zero! Inverse doesn't exist")
+
+        pass
 
     ## instance-methods ------------------------------------------------
 
@@ -309,7 +327,6 @@ class Matrix:
         del output[j]
         return Matrix(output).transpose()
 
-    
     ## dunder-methods --------------------------------------------------
 
     def __str__(self):
