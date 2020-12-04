@@ -86,7 +86,7 @@ list_53 = [[-2,3,-1],[5,-1,4],[4,-8,2]]
 # 4x4 matrix whose determinant is (-279) -------------------------------
 list_54 = [[7,4,2,0],[6,3,-1,2],[4,6,2,5],[8,2,-7,1]]
 
-inverse computation co
+
 ## 05. matrices whose inverses are known -------------------------------
 
 # 1x1 matrix whose inverse exists ------------------------------------
