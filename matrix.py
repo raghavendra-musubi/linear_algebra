@@ -122,7 +122,7 @@ class Matrix:
     @staticmethod
     def det(input_matrix):
         '''
-        compute determinant of 1x1, 2x2, or 3x3 matrices
+        compute determinant of square matrices
         '''
 
         # check if matrix is square
@@ -155,6 +155,28 @@ class Matrix:
         else:
             raise ValueError("Only square matrices have determinants!")
 
+    # compute classic adjoint of input Matrix ---------------------------
+    @staticmethod
+    def adj(input_matrix):
+        '''
+        compute classic adjoint of an input square matrix
+        refer to this article for more: https://www.cliffsnotes.com/study-guides/algebra/linear-algebra/the-determinant/the-classical-adjoint-of-a-square-matrix
+        '''
+
+        if input_matrix.is_square:
+
+            # init a zero matrix for the adjoint
+            output = Matrix.zero_matrix(input_matrix.size).final_matrix
+            
+            # iterate over each element to isolate the co-factor 
+            for row_num in range(input_matrix.size[0]):
+                for col_num in range(input_matrix.size[1]):
+                    output[row_num][col_num] = Matrix.det(input_matrix.drop(row_num,col_num))
+                    
+            return Matrix(output).transpose()
+                    
+        else:
+            raise TypeError("Classic adjoint can be computed only for square matrices!")
 
     ## instance-methods ------------------------------------------------
 
