@@ -155,7 +155,7 @@ class Matrix:
         else:
             raise ValueError("Only square matrices have determinants!")
 
-    # compute classic adjoint of input Matrix ---------------------------
+    # compute classic adjoint (adjunct) of input Matrix ---------------------------
     @staticmethod
     def adj(input_matrix):
         '''
@@ -165,15 +165,23 @@ class Matrix:
 
         if input_matrix.is_square:
 
-            # init a zero matrix for the adjoint
-            output = Matrix.zero_matrix(input_matrix.size).final_matrix
+            if  input_matrix.size[0] == 1:
+
+                return Matrix([[1]])
             
-            # iterate over each element to isolate the co-factor 
-            for row_num in range(input_matrix.size[0]):
-                for col_num in range(input_matrix.size[1]):
-                    output[row_num][col_num] = Matrix.det(input_matrix.drop(row_num,col_num))
-                    
-            return Matrix(output).transpose()
+            elif input_matrix.size[0] > 1:
+
+                # init a zero matrix for the adjoint
+                output = Matrix.zero_matrix(input_matrix.size).final_matrix
+                
+                # iterate over each element to isolate the co-factor 
+                for row_num in range(input_matrix.size[0]):
+                    for col_num in range(input_matrix.size[1]):
+
+                        curr_sign_setter = (-1)**( (row_num + 1) + (col_num + 1) )  
+                        output[row_num][col_num] = curr_sign_setter * Matrix.det(input_matrix.drop(row_num,col_num))
+                        
+                return Matrix(output)
                     
         else:
             raise TypeError("Classic adjoint can be computed only for square matrices!")

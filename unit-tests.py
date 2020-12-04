@@ -151,6 +151,13 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual( Matrix.det(Matrix(list_53)) , -6 )
         self.assertEqual( Matrix.det(Matrix(list_54)) , -279 )
 
+    # test adjoint computation
+    def test_adj_computation(self):
+        self.assertEqual( Matrix.adj(Matrix(list_51)) , Matrix([[1]]) )
+        self.assertEqual( Matrix.adj(Matrix(list_52)) , Matrix([[3,-2],[-1,4]]) )
+        self.assertEqual( Matrix.adj(Matrix(list_53)) , Matrix([[30,6,-36],[2,0,-4],[11,3,-13]]) )
+        self.assertEqual( Matrix.adj(Matrix(list_54)) , Matrix([[15,-98,4,104],[-156,331,-116,-226],[54,-111,33,21],[42,-107,67,68]]) )
+
     ## instance-method tests ---------------------------------------------
 
     # transpose tests ----------------------------------------------------
@@ -191,6 +198,7 @@ class TestStringMethods(unittest.TestCase):
     # trace test ----------------------------------------------------------
     def test_trace_val(self):
         self.assertEqual( Matrix(list_23).trace(), 15)
+        self.assertEqual( Matrix(list_33).trace(), 11)
 
     # test vector norm ----------------------------------------------------
     def test_vec_norm(self):
