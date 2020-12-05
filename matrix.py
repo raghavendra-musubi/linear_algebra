@@ -327,6 +327,27 @@ class Matrix:
         del output[j]
         return Matrix(output).transpose()
 
+    # compute determinant -----------------------------------------------
+    def determinant(self):
+        """
+        instance method to calculate the determinant 
+        """
+        return Matrix.det(self)
+
+    # compute adjoint --------------------------------------------------
+    def adjoint(self):
+        """
+        instance method to calculate the determinant 
+        """
+        return Matrix.adj(self)
+
+    # compute inverse --------------------------------------------------
+    def inverse(self):
+        """
+        instance method to calculate the determinant 
+        """
+        return Matrix.inv(self)
+
     ## dunder-methods --------------------------------------------------
 
     def __str__(self):

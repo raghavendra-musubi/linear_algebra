@@ -239,6 +239,26 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(   Matrix(list_33a).drop(1,2), Matrix([[10,60],[40,80]])  )
         self.assertEqual(   Matrix(list_44).drop(3,0),  Matrix([[6,3,4],[9,1,1],[0,3,2]]) )
 
+    # test instance determinant -------------------------------------------
+    def test_instance_det(self):
+        self.assertEqual( Matrix(list_51).determinant() , -4 )
+        self.assertEqual( Matrix(list_52).determinant() , 10 )
+        self.assertEqual( Matrix(list_53).determinant() , -6 )
+        self.assertEqual( Matrix(list_54).determinant() , -279 )
+
+    # test instance adjoint -------------------------------------------
+    def test_instance_adj(self):
+        self.assertEqual( Matrix(list_51).adjoint() , Matrix([[1]]).transpose() )
+        self.assertEqual( Matrix(list_52).adjoint() , Matrix([[3,-2],[-1,4]]).transpose() )
+        self.assertEqual( Matrix(list_53).adjoint() , Matrix([[30,6,-36],[2,0,-4],[11,3,-13]]).transpose() )
+        self.assertEqual( Matrix(list_54).adjoint() , Matrix([[15,-98,4,104],[-156,331,-116,-226],[54,-111,33,21],[42,-107,67,68]]).transpose() )
+
+    # test instance inverse -------------------------------------------
+    def test_instance_inv(self):
+        self.assertEqual( Matrix(list_61).inverse() , Matrix([[0.25]]) )
+        self.assertEqual( Matrix(list_62).inverse() , Matrix([[0.6000000000000001, -0.7000000000000001],[-0.2, 0.4]]) )
+        self.assertEqual( Matrix(list_63).inverse() , Matrix([[0.2, 0.2, 0.0],[-0.2, 0.30000000000000004, 1.0],[0.2, -0.30000000000000004, 0.0 ]]) )
+
     ## operator-overloading tests -----------------------------------------
     
     # add matrices 
